@@ -1,4 +1,4 @@
-package homework;
+package homework.oop;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +25,10 @@ public class User {
         this.mail = mail;
 //        this.password = hashPassword(rawPassword);
         this.password = hashPasswordUserBCrypt(rawPassword);
+    }
+    public User(String name, String mail) {
+        this.name = name;
+        this.mail = mail;
     }
     public User(){}
 

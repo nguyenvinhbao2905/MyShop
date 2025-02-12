@@ -1,4 +1,4 @@
-package homework;
+package homework.oop;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,8 +25,12 @@ public class Product {
         this.price = price;
         this.category = category;
     }
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
 
-    public void displayItems() {
+    public void showProduct() {
         System.out.println("Name: " + name);
         System.out.println("Price: " + price);
         System.out.println("Category: " + category);

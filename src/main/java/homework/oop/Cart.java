@@ -1,9 +1,8 @@
-package homework;
+package homework.oop;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +14,19 @@ public class Cart {
     private List<Product> products;
     private HashMap<Product, Integer> productQuantity;
 
+
 //    public Cart() {
 //        this.products = new ArrayList<>();
 //    }
     public Cart(){
         this.productQuantity = new HashMap<>();
+    }
+    public Cart(HashMap<Product, Integer> productQuantity){
+        this.productQuantity = productQuantity;
+    }
+
+    public HashMap<Product, Integer> getProductQuantity(){
+        return productQuantity;
     }
 
 
@@ -50,6 +57,7 @@ public class Cart {
                 .mapToDouble(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
+
 
 
 //    public void showCart() {
