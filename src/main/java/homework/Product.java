@@ -1,5 +1,11 @@
 package homework;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
 public class Product {
     private String name;
     private double price;
@@ -14,38 +20,12 @@ public class Product {
         this.category = category;
         this.stock = stock;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Product(String name, double price, String category) {
         this.name = name;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
+        this.price = price;
         this.category = category;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
     public void displayItems() {
         System.out.println("Name: " + name);
         System.out.println("Price: " + price);

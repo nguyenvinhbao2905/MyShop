@@ -1,12 +1,17 @@
 package homework;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.Scanner;
 
+@Getter
+@Setter
 public class User {
+
     private String name;
     private String mail;
     private String password;
@@ -22,30 +27,6 @@ public class User {
         this.password = hashPasswordUserBCrypt(rawPassword);
     }
     public User(){}
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String hashPassword(String rawPassword) {
         return encoder.encode(rawPassword);
