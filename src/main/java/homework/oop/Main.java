@@ -1,8 +1,8 @@
 package homework.oop;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -17,6 +17,8 @@ public class Main {
 //        testReview();
 //        testPayment();
 //        testDiscount();
+//        testInventory();
+        testCustomerAndAdmin();
     }
     public static void testProduct(){
         Product p = new Product("Dien thoai", 250, "Thiet bi dien tu", 30);
@@ -34,10 +36,10 @@ public class Main {
         Product p1 = new Product("Dien thoai ban", 200, "Thiet bi dien tu");
 
         Cart cart = new Cart();
-        cart.add(p, 10);
-        cart.add(p1, 20);
-        System.out.println(cart.getTotal());
-        cart.showCart();
+        cart.addProduct(p, 10);
+        cart.addProduct(p1, 20);
+        System.out.println(cart.getTotalPrice());
+//        System.out.println(cart.getStock(p1));
 
 
     }
@@ -76,20 +78,77 @@ public class Main {
         Product p = new Product("Dien thoai", 260, "Thiet bi dien tu");
         Product p1 = new Product("Dien thoai", 2500, "Thiet bi dien tu");
         Cart cart = new Cart();
-        cart.add(p, 10);
+        cart.addProduct(p, 10);
         Discount dc = new Discount();
         dc.applyDiscount(p, 10);
         System.out.println("Product price after discount: " + p.getPrice());
+
+
+        List<Product> list = new ArrayList<>();
+        list.add(p);
+        list.add(p1);
+
+        Cart cart1 = new Cart(list);
+
+        dc.applyBulkDiscount(cart1, 1, 15);
+        System.out.println("The total value of the product in the cart after discount: " + cart1.getTotalPrice());
+
+    }
+    public static void testInventory(){
+        Product p = new Product("Dien thoai", 260, "Thiet bi dien tu");
+        Product p1 = new Product("Dien thoai", 2500, "Thiet bi dien tu");
+        Product p2 = new Product("Laptop", 500, "Thiet bi dien tu");
+
+        Product p3 = new Product("Laptop");
+
 
 
         HashMap<Product, Integer> hashMap = new HashMap<>();
         hashMap.put(p, 10);
         hashMap.put(p1, 20);
 
-        Cart cart1 = new Cart(hashMap);
+        Inventory inv = new Inventory(hashMap);
 
-        dc.applyBulkDiscount(cart1, 1, 15);
-        System.out.println("The total value of the product in the cart after discount: " + cart1.getTotal());
+        System.out.println("Product has the stock: " + inv.checkStock(p));
+
+        inv.restock(p2, 100);
+
+
+        HashMap<Product, Integer> orderProduct = new HashMap<>();
+
+        orderProduct.put(p, 4);
+        orderProduct.put(p2, 5);
+
+        User user = new User("bao", "bao@");
+
+        Order order = new Order(1, user, orderProduct);
+
+
+
+        order.setOrderStatus(Order.OrderStatus.PROCESSING);
+        inv.detectStock(order);
+
+        System.out.println("So luong p con lai: " + inv.checkStock(p));
+
+    }
+
+    public static void testCustomerAndAdmin(){
+        Admin admin = new Admin("admin01", "admin@mail.com", "admin123");
+
+        Customer customer = new Customer("customer01", "customer@mail.com", "cust123");
+
+        Product phone = new Product("Dien thoai", 1000, "thiet bi dien tu", 50);
+        Product laptop = new Product("Lap top", 2000, "thiet bi dien tu", 30);
+
+        admin.showPermissions();
+        customer.showPermissions();
+
+        admin.addProduct(phone);
+        admin.addProduct(laptop);
+
+        customer.addToCart(phone, 1);
+
+        customer.writeReview(phone, 5, "Great phone!");
 
     }
 

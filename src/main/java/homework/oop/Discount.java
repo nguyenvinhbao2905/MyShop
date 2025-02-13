@@ -3,7 +3,6 @@ package homework.oop;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Map;
 
 @Getter
 @Setter
@@ -20,14 +19,16 @@ public class Discount {
         product.setPrice(product.getPrice() - discount);
     }
     public void applyBulkDiscount(Cart cart, double minThresholdPercentage, double discountPercentage) {
-        double priceTotal = cart.getTotal();
+        double priceTotal = cart.getTotalPrice();
 
         if (priceTotal > minThresholdPercentage) {
-            for (Map.Entry<Product, Integer> entry : cart.getProductQuantity().entrySet()){
-                Product product = entry.getKey();
-                double percentage = entry.getValue();
-                applyDiscount(product, percentage);
-            }
+            cart.getProducts().forEach(product -> applyDiscount(product, discountPercentage));
+
+//            for (Map.Entry<Product, Integer> entry : cart.getProducts().entrySet()){
+//                Product product = entry.getKey();
+//                double percentage = entry.getValue();
+//                applyDiscount(product, percentage);
+//            }
         }
     }
 }

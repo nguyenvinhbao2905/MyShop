@@ -27,8 +27,13 @@ public class Order {
     public Order(int orderId, User user, HashMap<Product, Integer> products, double totalPrice) {
         this.orderId = orderId;
         this.user = user;
-        this.products = new HashMap<>();
+        this.products = new HashMap<>(products);
         this.totalPrice = totalPrice;
+    }
+    public Order (int orderId, User user, HashMap<Product, Integer> products) {
+        this.orderId = orderId;
+        this.user = user;
+        this.products = new HashMap<>(products);
     }
 
     public void listProducts() {
@@ -36,11 +41,11 @@ public class Order {
             System.out.println("No cart found");
             return;
         }
-        System.out.println("List of products:");
+        System.out.println("List of products your order: ");
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
             Product product = entry.getKey();
             int quantity = entry.getValue();
-            System.out.println(product.getName() + ", Quantity: " + quantity);
+            System.out.println(product + ", Quantity: " + quantity);
         }
     }
     public boolean updateStatus(OrderStatus newStatus) {

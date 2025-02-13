@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,9 +16,14 @@ public class User {
     private String name;
     private String mail;
     private String password;
+    protected List<Permission> permissions;
 
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public enum Permission {
+        MANAGE_PRODUCTS, MANAGE_ORDERS, PURCHASE_ITEMS, WRITE_REVIEWS;
+    }
 
 
     public User(String name, String mail, String rawPassword) {
@@ -25,7 +31,9 @@ public class User {
         this.mail = mail;
 //        this.password = hashPassword(rawPassword);
         this.password = hashPasswordUserBCrypt(rawPassword);
+        this.permissions = new ArrayList<>();
     }
+
     public User(String name, String mail) {
         this.name = name;
         this.mail = mail;
@@ -51,6 +59,9 @@ public class User {
         System.out.println("Name: " + name);
         System.out.println("Mail: " + mail);
     }
+    public void showPermissions() {
+        System.out.println("Permissions:" + permissions);
+    }
 
     public void login(){
         Scanner sc = new Scanner(System.in);
@@ -62,8 +73,8 @@ public class User {
         String password = sc.nextLine();
     }
 
-    public boolean checkPasswordInList(List<String> passwords){
-        return passwords.stream().anyMatch(this::checkPassword);
+    public boolean checkPasswordInList(String password){
+        return this.password.equals(password);
     }
 
 
