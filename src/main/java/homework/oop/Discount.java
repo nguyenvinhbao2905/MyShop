@@ -22,8 +22,12 @@ public class Discount {
     public void applyBulkDiscount(Cart cart, double minThresholdPercentage, double discountPercentage) {
         double priceTotal = cart.getTotal();
 
-//        if (priceTotal > minThresholdPercentage) {
-//            for (Map.Entry<Product, Integer> entry)
-//        }
+        if (priceTotal > minThresholdPercentage) {
+            for (Map.Entry<Product, Integer> entry : cart.getProductQuantity().entrySet()){
+                Product product = entry.getKey();
+                double percentage = entry.getValue();
+                applyDiscount(product, percentage);
+            }
+        }
     }
 }

@@ -9,16 +9,14 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
 
-        //testProduct();
+//        testProduct();
 //        System.out.println("------------------");
 //        testUser();
-
 //        testCart();
 //        testOrder();
 //        testReview();
 //        testPayment();
-
-        testDiscount();
+//        testDiscount();
     }
     public static void testProduct(){
         Product p = new Product("Dien thoai", 250, "Thiet bi dien tu", 30);

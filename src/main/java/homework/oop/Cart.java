@@ -53,9 +53,11 @@ public class Cart {
     }
 
     public double getTotal() {
-        return productQuantity.entrySet().stream()
-                .mapToDouble(entry -> entry.getKey().getPrice() * entry.getValue())
-                .sum();
+        double total = 0;
+        for (Map.Entry<Product, Integer> entry : this.productQuantity.entrySet()) {
+            total += entry.getKey().getPrice() * entry.getValue();
+        }
+        return total;
     }
 
 
