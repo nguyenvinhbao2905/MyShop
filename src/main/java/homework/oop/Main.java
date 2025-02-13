@@ -9,16 +9,25 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
 
-//        testProduct();
-//        System.out.println("------------------");
-//        testUser();
-//        testCart();
-//        testOrder();
-//        testReview();
-//        testPayment();
-//        testDiscount();
-//        testInventory();
+        System.out.println("------------------ test Product");
+        testProduct();
+        System.out.println("------------------ test User");
+        testUser();
+        System.out.println("------------------ testCart");
+        testCart();
+        System.out.println("------------------ testOrder");
+        testOrder();
+        System.out.println("------------------ testReview");
+        testReview();
+        System.out.println("------------------ testPayment");
+        testPayment();
+        System.out.println("------------------ testDiscount");
+        testDiscount();
+        System.out.println("------------------ testInventory");
+        testInventory();
+        System.out.println("------------------ testCustomerAndAdmin");
         testCustomerAndAdmin();
+        System.out.println("------------------ test User");
     }
     public static void testProduct(){
         Product p = new Product("Dien thoai", 250, "Thiet bi dien tu", 30);
