@@ -4,6 +4,8 @@ import homework.oop.order.Cart;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Map;
+
 
 @Getter
 @Setter
@@ -23,13 +25,12 @@ public class Discount {
         double priceTotal = cart.getTotalPrice();
 
         if (priceTotal > minThresholdPercentage) {
-            cart.getProducts().forEach(product -> applyDiscount(product, discountPercentage));
-
-//            for (Map.Entry<Product, Integer> entry : cart.getProducts().entrySet()){
-//                Product product = entry.getKey();
-//                double percentage = entry.getValue();
-//                applyDiscount(product, percentage);
-//            }
+//            cart.getItems().forEach(items -> applyDiscount(product, discountPercentage));
+            for (Map.Entry<Product, Integer> entry : cart.getItems().entrySet()){
+                Product product = entry.getKey();
+                double percentage = entry.getValue();
+                applyDiscount(product, percentage);
+            }
         }
     }
 }

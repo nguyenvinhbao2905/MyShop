@@ -6,23 +6,49 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 
 public class Cart {
     @Getter
     @Setter
-    private List<Product> products;
-    private HashMap<Product, Integer> productQuantity;
+    private Map<Product, Integer> items;
 
+    private static Cart cart;
 
-    public Cart(List<Product> products) {
-        this.products = new ArrayList<>(products);
-    }
 
     public Cart(){
-        this.products = new ArrayList<>();
+        this.items = new HashMap<>();
     }
+
+    public static Cart getInstance(){
+        if(cart == null){
+            cart = new Cart();
+        }
+        return cart;
+    }
+
+    public void addProduct(Product product, int quantity) {
+        items.put(product, items.getOrDefault(product, 0) + quantity);
+    }
+
+    public void removeProduct(Product product) {
+        items.remove(product);
+    }
+
+    public double getTotalPrice() {
+        return items.entrySet().stream().
+                mapToDouble(entry -> entry.getKey().getPrice() * entry.getValue())
+                .sum();
+    }
+
+    public void viewCart(){
+        System.out.println("Your cart: ");
+        for (Map.Entry<Product, Integer> entry : items.entrySet()) {
+            System.out.println(entry.getKey().getName() + " : " + entry.getValue());
+        }
+    }
+
 //    public Cart(HashMap<Product, Integer> productQuantity){
 //        this.productQuantity = productQuantity;
 //    }
@@ -31,24 +57,12 @@ public class Cart {
 //        return productQuantity;
 //    }
 
-    public int getStock(Product product){
-        return products.get(products.indexOf(product)).getStock();
-    }
+//    public int getStock(Product product){
+//        return products.get(products.indexOf(product)).getStock();
+//    }
 
 
-    public void addProduct(Product product, int quantity) {
-        for (int i = 0; i < quantity; i++) {
-            this.products.add(product);
-        }
-    }
 
-    public void removeProduct(Product product) {
-        this.products.removeIf(product1 -> product1.equals(product));
-    }
-
-    public double getTotalPrice() {
-        return products.stream().mapToDouble(Product::getPrice).sum();
-    }
 
 //    public void add(Product product, int quantity) {
 //        this.productQuantity.put(product, this.productQuantity.getOrDefault(product, 0) + quantity);

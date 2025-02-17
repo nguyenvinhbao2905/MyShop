@@ -109,7 +109,7 @@ public class Main {
         list.add(p);
         list.add(p1);
 
-        Cart cart1 = new Cart(list);
+        Cart cart1 = new Cart();
 
         dc.applyBulkDiscount(cart1, 1, 15);
         System.out.println("The total value of the product in the cart after discount: " + cart1.getTotalPrice());

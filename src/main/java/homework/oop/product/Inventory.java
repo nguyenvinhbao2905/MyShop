@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory {
-    private Product product;
     private HashMap<Product, Integer> products;
-    private Order order;
 
     public Inventory() {}
 
