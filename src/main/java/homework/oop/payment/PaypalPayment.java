@@ -1,4 +1,4 @@
-package homework.oop;
+package homework.oop.payment;
 
 
 import lombok.Getter;

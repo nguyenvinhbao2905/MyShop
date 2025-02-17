@@ -1,4 +1,7 @@
-package homework.oop;
+package homework.oop.user;
+
+import homework.oop.order.Order;
+import homework.oop.product.Product;
 
 import java.util.ArrayList;
 
@@ -8,7 +11,6 @@ import java.util.List;
 public class Admin extends User {
 
     private List<Product> products;
-    private List<Order> orders;
 
     public Admin(String name, String email, String password) {
         super(name, email, password);

@@ -1,5 +1,6 @@
-package homework.oop;
+package homework.oop.product;
 
+import homework.oop.order.Cart;
 import lombok.Getter;
 import lombok.Setter;
 

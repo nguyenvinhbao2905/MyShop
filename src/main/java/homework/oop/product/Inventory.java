@@ -1,4 +1,6 @@
-package homework.oop;
+package homework.oop.product;
+
+import homework.oop.order.Order;
 
 import java.util.HashMap;
 import java.util.Map;

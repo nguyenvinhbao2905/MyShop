@@ -1,10 +1,11 @@
-package homework.oop;
+package homework.oop.user;
 
-import org.hibernate.mapping.List;
+import homework.oop.order.Cart;
+import homework.oop.product.Product;
+import homework.oop.order.Review;
 
 public class Customer extends User{
     private Cart cart;
-    private Review review;
 
 
 
@@ -21,7 +22,7 @@ public class Customer extends User{
     }
 
     public void writeReview(Product product, int rating, String comment) {
-        review = new Review(this, product, rating, comment);
+        Review review = new Review(this, product, rating, comment);
         System.out.println(this.getName() + "wrote review for " + product);
     }
     @Override

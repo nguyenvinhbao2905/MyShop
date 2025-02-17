@@ -1,4 +1,4 @@
-package homework.oop;
+package homework.oop.user;
 
 import lombok.Getter;
 import lombok.Setter;

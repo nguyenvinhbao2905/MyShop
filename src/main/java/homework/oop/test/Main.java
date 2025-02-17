@@ -1,4 +1,16 @@
-package homework.oop;
+package homework.oop.test;
+
+import homework.oop.order.Cart;
+import homework.oop.order.Order;
+import homework.oop.order.Review;
+import homework.oop.payment.CreditCardPayment;
+import homework.oop.payment.PaypalPayment;
+import homework.oop.product.Discount;
+import homework.oop.product.Inventory;
+import homework.oop.product.Product;
+import homework.oop.user.Admin;
+import homework.oop.user.Customer;
+import homework.oop.user.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;

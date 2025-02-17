@@ -1,4 +1,4 @@
-package homework.oop;
+package homework.oop.product;
 
 import lombok.Getter;
 import lombok.Setter;
