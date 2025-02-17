@@ -167,7 +167,7 @@ public class Main {
         admin.addProduct(phone);
         admin.addProduct(laptop);
 
-        customer.addToCart(phone, 1);
+        customer.addProductToYourCart(phone, 1);
 
         customer.writeReview(phone, 5, "Great phone!");
 
