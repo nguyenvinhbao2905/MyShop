@@ -39,4 +39,5 @@ public class Inventory {
             order.updateStatus(Order.OrderStatus.SHIPPED);
         }
     }
+
 }

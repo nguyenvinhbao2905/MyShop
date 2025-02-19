@@ -1,7 +1,9 @@
-package homework.oop.product;
+package homework.collection.product;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Objects;
 
 
 @Getter
@@ -11,6 +13,7 @@ public class Product {
     private double price;
     private String category;
     private int stock;
+    private int id;
 
     public Product() {
     }
@@ -48,5 +51,18 @@ public class Product {
                 ", category='" + category + '\'' +
                 ", stock=" + stock +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return name.equals(product.name) && category.equals(product.category) && price == product.price;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, category, price);
     }
 }

@@ -1,19 +1,20 @@
-package homework.oop.order;
+package homework.collection.order;
 
-import homework.oop.product.Product;
+import homework.collection.product.Product;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 
 public class Cart {
     @Getter
     @Setter
     private Map<Product, Integer> items;
+    private List<Product> products;
     private static Cart cart;
+
+
 
 
     public Cart(){
@@ -26,6 +27,7 @@ public class Cart {
         }
         return cart;
     }
+
 
     public void addProduct(Product product, int quantity) {
         items.put(product, items.getOrDefault(product, 0) + quantity);
@@ -49,15 +51,37 @@ public class Cart {
     }
 
 
+/* Bai 7 su dung linked list
+    public Cart() {
+        this.products = new LinkedList<>();
+    }
+
+    public void addProduct(Product product) {
+        addProducts(Collections.singletonList(product));
+
+        System.out.println("Product added: " + product);
+    }
+
+    public void addProducts(List<Product> products) {
+        this.products.addAll(products);
+
+        System.out.println(products.size() + " products added");
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
+    }
+
+    public Product getFirstProduct() {
+        return products.isEmpty() ? null : products.getFirst();
+    }
+    public Product getLastProduct() {
+        return products.isEmpty() ? null : products.getLast();
+    }
+*/
 
     /*
-    Quản lý giỏ hàng bằng linked list
-     */
-
-
-
-
- /*   public Cart(HashMap<Product, Integer> productQuantity){
+    public Cart(HashMap<Product, Integer> productQuantity){
         this.productQuantity = productQuantity;
     }
 
@@ -118,5 +142,5 @@ public class Cart {
         }
     }
 
-  */
+     */
 }

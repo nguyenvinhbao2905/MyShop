@@ -170,6 +170,9 @@ public class Main {
         customer.addProductToYourCart(phone, 1);
 
         customer.writeReview(phone, 5, "Great phone!");
+        customer.getProductsInProductManager();
+
+
 
     }
 
