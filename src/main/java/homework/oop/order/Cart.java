@@ -4,7 +4,6 @@ import homework.oop.product.Product;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +32,7 @@ public class Cart {
     }
 
     public void removeProduct(Product product) {
-        items.remove(product);
+        items.remove(product.equals(product));
     }
 
     public double getTotalPrice() {

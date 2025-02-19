@@ -39,4 +39,14 @@ public class Product {
         System.out.println("Category: " + category);
         System.out.println("Stock: " + stock);
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", category='" + category + '\'' +
+                ", stock=" + stock +
+                '}';
+    }
 }
