@@ -27,6 +27,7 @@ public class Order {
         this.user = user;
         this.products = new HashMap<>(products);
         this.totalPrice = totalPrice;
+        this.orderStatus = OrderStatus.PROCESSING;
     }
     public Order (int orderId, User user, HashMap<Product, Integer> products) {
         this.orderId = orderId;
@@ -47,20 +48,23 @@ public class Order {
         }
     }
     public boolean updateStatus(OrderStatus newStatus) {
+        if (this.orderStatus == null) {
+            System.out.println("Order status is not initialized.");
+            return false;
+        }
+
         if (this.orderStatus == OrderStatus.CANCELLED) {
-            System.out.println("Can not change the state when the order was canceled!!!");
+            System.out.println("Cannot change status of a cancelled order!!!");
             return false;
         }
-        if (newStatus == OrderStatus.SHIPPED || this.orderStatus != OrderStatus.PROCESSING) {
-            System.out.println("The assigned order must be in the processing state.");
-            return false;
+        if (this.orderStatus == OrderStatus.PROCESSING && newStatus == OrderStatus.SHIPPED) {
+            this.orderStatus = newStatus;
+            System.out.println("Order status updated to: " + this.orderStatus);
+            return true;
         }
-        this.orderStatus = newStatus;
-        System.out.println("New order status: " + this.orderStatus);
-        return true;
+
+        System.out.println("Invalid status transition!");
+        return false;
     }
 
-    public OrderStatus getOrderStatus() {
-        return this.orderStatus;
-    }
 }

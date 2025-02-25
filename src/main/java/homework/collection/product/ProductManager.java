@@ -41,7 +41,7 @@ public class ProductManager {
 
         productsTreeMap.computeIfAbsent(product.getPrice(), k -> new ArrayList<>()).add(product);
 
-        assignIds(products);
+        
         System.out.println("Product added: " + product);
 
 
@@ -78,7 +78,7 @@ public class ProductManager {
                 productsTreeMap.computeIfAbsent(newProduct.getPrice(), k -> new ArrayList<>()).add(newProduct);
                 addedCount++;
             }
-            assignIds(products);
+            
         }
 
         System.out.println("Added " + addedCount + " new products (existing products updated)");
@@ -106,7 +106,7 @@ public class ProductManager {
     }
 
     public void removeProduct(String name) {
-        products.removeIf(product -> product.getName().equals(name));
+        products.removeIf(product -> name.equals(product.getName()));
     }
     public void showProducts() {
         products.forEach(System.out::println);
@@ -136,11 +136,6 @@ public class ProductManager {
         }
     }
 
-    public void assignIds(List<Product> products) {
-        AtomicInteger index = new AtomicInteger(1);
-        products.forEach(product -> product.setId("Product" + index.getAndIncrement()));
-    }
-
     public void printProductsByPrice() {
         System.out.println("Product list sorted by price:");
         for (Map.Entry<Double, List<Product>> entry : productsTreeMap.entrySet()) {
@@ -159,6 +154,7 @@ public class ProductManager {
                         Collectors.toList()
                 ));
     }
+
 
 
 

@@ -1,10 +1,14 @@
 package homework.collection.test;
 
+import homework.collection.order.Order;
+import homework.collection.order.OrderManager;
 import homework.collection.order.Review;
 import homework.collection.order.ReviewManager;
+import homework.collection.product.CategoryManager;
 import homework.collection.product.InventoryManager;
 import homework.collection.product.Product;
 import homework.collection.product.ProductManager;
+import homework.collection.search.SearchHistoryManager;
 import homework.collection.user.Customer;
 import homework.collection.user.User;
 import homework.collection.user.UserRegistry;
@@ -20,6 +24,7 @@ public class Main {
 //        testInventoryManager();
 
 //        testReview();
+        testOrderManager();
     }
 
 
@@ -163,6 +168,42 @@ public class Main {
 
         System.out.println("\nAll Reviews:");
         reviewManager.printAllReview();
+    }
+
+    public static void testOrderManager() {
+
+    }
+
+    public static void testCategoryManager() {
+        CategoryManager manager = new CategoryManager();
+
+        manager.addSubcategory("Electronics", "Phone");
+        manager.addSubcategory("Electronics", "Laptop");
+        manager.addSubcategory("Fashion", "Clothing");
+        manager.addSubcategory("Fashion", "Shoes");
+
+        manager.printCategories();
+
+        System.out.println("Subcategories of Electronics: " + manager.getSubcategories("Electronics"));
+
+    }
+
+    public static void testSearchHistory() {
+        SearchHistoryManager searchManager = new SearchHistoryManager();
+
+        searchManager.addSearch("Dell Laptop");
+        searchManager.addSearch("iPhone");
+        searchManager.addSearch("Bluetooth Headphones");
+        searchManager.addSearch("Samsung Tablet");
+        searchManager.addSearch("Smartwatch");
+        searchManager.addSearch("Dash Camera");
+        searchManager.addSearch("Bluetooth Speaker");
+        searchManager.addSearch("Mechanical Keyboard");
+        searchManager.addSearch("Gaming Mouse");
+        searchManager.addSearch("Sony TV");
+        searchManager.addSearch("Canon Camera"); // History is full, will be removed
+
+        searchManager.printHistory();
     }
 
 
