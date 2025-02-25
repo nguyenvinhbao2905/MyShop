@@ -8,16 +8,12 @@ import lombok.Setter;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Getter
 @Setter
 public class Order {
-    @Getter
     private int orderId;
-    @Getter
     private User user;
-    @Getter
     private HashMap<Product, Integer> products;
-    @Getter
     private double totalPrice;
     private OrderStatus orderStatus;
 

@@ -5,62 +5,33 @@ import homework.collection.order.Review;
 import homework.collection.product.Product;
 import homework.collection.product.ProductManager;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 
 public class Customer extends User {
     private Set<Product> favoriteProducts;
-
-    public Customer(String name, String email, String password) {
-        super(name, email, password);
-        permissions.add(Permission.PURCHASE_ITEMS);
-        permissions.add(Permission.WRITE_REVIEWS);
-    }
+    private Map<String, Integer> purchasedProducts;
+    private int purchaseCount;
 
 
-    public Customer(String name) {
-        super(name);
+    public Customer(String name, String email) {
+        super(name, email);
         favoriteProducts = new HashSet<Product>();
+        purchasedProducts = new HashMap<String, Integer>();
+        this.purchaseCount = 0;
     }
 
-    public void getProductsInProductManager() {
-        System.out.println("Viewing products");
-        for (Product product : ProductManager.getInstance().getProducts()) {
-            System.out.println(product);
-        }
+    public void buyProduct(Product product) {
+        this.purchasedProducts.put(product.getName(), purchasedProducts.getOrDefault(product.getName(), 0) + 1);
+        this.purchaseCount++;
+        System.out.println(this.getName() + "  has bought: " + product.getName());
     }
 
-//    public void getProductInYourCart() {
-//        if (permissions.contains(Permission.PURCHASE_ITEMS)) {
-//            System.out.println("Viewing products in your cart");
-//            Cart.getInstance().viewCart();
-//        }
-//        System.out.println("Permission denied!!");
-//    }
-
-//    public void addProductToYourCart(Product product, int quantity) {
-//        if (permissions.contains(Permission.PURCHASE_ITEMS)) {
-//            System.out.println("Adding product to your cart");
-//            Cart.getInstance().addProduct(product, quantity);
-//        }
-//        System.out.println("Permission denied!!");
-//    }
-//    public void removeProductFromYourCart(Product product) {
-//        if (permissions.contains(Permission.PURCHASE_ITEMS)) {
-//            System.out.println("Removing product from your cart");
-//            Cart.getInstance().removeProduct(product);
-//        }
-//        System.out.println("Permission denied!!");
-//    }
-
-    public void writeReview(Product product, int rating, String comment) {
-        Review review = new Review(this, product, rating, comment);
-        System.out.println(this.getName() + "wrote review for " + product);
-    }
-    @Override
-    public void showPermissions() {
-        System.out.println("Customer's permissions: " + permissions);
+    public int getTotalPurchasedProducts() {
+        return purchasedProducts.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     public void addFavoriteProduct(Product product) {
@@ -84,5 +55,6 @@ public class Customer extends User {
             System.out.println(" " + product);
         }
     }
+
 
 }

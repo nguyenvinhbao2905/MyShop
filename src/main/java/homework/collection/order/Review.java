@@ -55,4 +55,14 @@ public class Review {
     }
 
 
+    @Override
+    public String toString() {
+        return "Review{" +
+                "user=" + user +
+                ", product=" + product +
+                ", rating=" + rating +
+                ", comment='" + comment + '\'' +
+                ", createAt=" + createAt +
+                '}';
+    }
 }

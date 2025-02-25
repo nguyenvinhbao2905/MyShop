@@ -13,7 +13,7 @@ public class Product {
     private double price;
     private String category;
     private int stock;
-    private int id;
+    private String id;
 
     public Product() {
     }
@@ -50,9 +50,9 @@ public class Product {
                 ", price=" + price +
                 ", category='" + category + '\'' +
                 ", stock=" + stock +
+                ", id='" + id + '\'' +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {

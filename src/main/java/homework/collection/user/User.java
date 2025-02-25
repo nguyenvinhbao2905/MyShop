@@ -44,6 +44,8 @@ public class User {
     }
     public User(){}
 
+
+
     public String hashPassword(String rawPassword) {
         return encoder.encode(rawPassword);
     }
@@ -86,13 +88,21 @@ public class User {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         User user = (User) obj;
-        return mail.equals(user.mail);
+        return name.equals(user.name) && mail.equals(user.mail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mail);
+        return Objects.hash(name, mail);
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", mail='" + mail + '\'' +
+                ", password='" + password + '\'' +
+                ", permissions=" + permissions +
+                '}';
+    }
 }

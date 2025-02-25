@@ -5,16 +5,19 @@ import org.antlr.v4.runtime.tree.Tree;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class ProductManager {
     private static ProductManager instance;
     @Getter
     private List<Product> products;
     private HashSet<Product> productsSet;
+    private TreeMap<Double, List<Product>> productsTreeMap;
 
     public ProductManager() {
         this.products = new ArrayList<>();
-        this.productsSet = new HashSet<>();
+        this.productsSet = new HashSet<>(products);
+        this.productsTreeMap = new TreeMap<>();
     }
 
     public static ProductManager getInstance() {
@@ -33,8 +36,12 @@ public class ProductManager {
                 return;
             }
         }
-        this.products.add(product);
-        this.productsSet.add(product);
+        products.add(product);
+        productsSet.add(product);
+
+        productsTreeMap.computeIfAbsent(product.getPrice(), k -> new ArrayList<>()).add(product);
+
+        assignIds(products);
         System.out.println("Product added: " + product);
 
 
@@ -68,8 +75,10 @@ public class ProductManager {
             if (!exists) {
                 this.products.add(newProduct);
                 this.productsSet.add(newProduct);
+                productsTreeMap.computeIfAbsent(newProduct.getPrice(), k -> new ArrayList<>()).add(newProduct);
                 addedCount++;
             }
+            assignIds(products);
         }
 
         System.out.println("Added " + addedCount + " new products (existing products updated)");
@@ -126,10 +135,31 @@ public class ProductManager {
             System.out.println(category);
         }
     }
+
     public void assignIds(List<Product> products) {
         AtomicInteger index = new AtomicInteger(1);
-        products.forEach(product -> product.setId(index.getAndIncrement()));
+        products.forEach(product -> product.setId("Product" + index.getAndIncrement()));
     }
+
+    public void printProductsByPrice() {
+        System.out.println("Product list sorted by price:");
+        for (Map.Entry<Double, List<Product>> entry : productsTreeMap.entrySet()) {
+            System.out.println("Price: $" + entry.getKey());
+            for (Product product : entry.getValue()) {
+                System.out.println("  - " + product);
+            }
+        }
+    }
+
+    public TreeMap<Double, List<Product>> getProductsTreeMap(double price) {
+        return products.stream().filter(p -> p.getPrice() >= price)
+                .collect(Collectors.groupingBy(
+                        Product::getPrice,
+                        TreeMap::new,
+                        Collectors.toList()
+                ));
+    }
+
 
 
 //    public void updateProduct(Product product) {

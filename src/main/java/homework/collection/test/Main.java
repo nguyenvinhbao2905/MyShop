@@ -1,5 +1,8 @@
 package homework.collection.test;
 
+import homework.collection.order.Review;
+import homework.collection.order.ReviewManager;
+import homework.collection.product.InventoryManager;
 import homework.collection.product.Product;
 import homework.collection.product.ProductManager;
 import homework.collection.user.Customer;
@@ -11,9 +14,12 @@ import java.util.*;
 public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-//        testProduct();
+        testProduct();
 //        testUser();
-        testCustomer();
+//        testCustomer();
+//        testInventoryManager();
+
+//        testReview();
     }
     public static void testProduct(){
         ProductManager productManager = new ProductManager();
@@ -32,6 +38,8 @@ public class Main {
         products.add(new Product("Sony WH-1000XM5 Headphones", 399.99, "Accessories", 30));
         products.add(new Product("Apple iPad Pro 12.9", 1199.99, "Tablets", 12));
         products.add(new Product("Laptop", 1299.99, "Electronics", 30));
+
+
 
         System.out.println("\nList product after add products: ");
         productManager.addProducts(products);
@@ -56,6 +64,18 @@ public class Main {
 
         productManager.printCategories();
 
+        productManager.printProductsByPrice();
+
+        double targetPrice = 999.99;
+        TreeMap<Double, List<Product>> result = productManager.getProductsTreeMap(targetPrice);
+
+        if (result.containsKey(targetPrice)) {
+            System.out.println("Price: " + targetPrice);
+            result.get(targetPrice).forEach(product ->
+                    System.out.println(" - " + product.getName()));
+        } else {
+            System.out.println("No products found at price: " + targetPrice);
+        }
     }
 
     public static void testUser() {
@@ -68,7 +88,7 @@ public class Main {
         user.checkEmail("abc@example.com"); // In: "Email is not existed"
     }
     public static void testCustomer() {
-        Customer customer = new Customer("Bao");
+        Customer customer = new Customer("Bao", "hfofhaofhosa");
         List<Product> products = new ArrayList<>();
 
         products.add(new Product("Smartphone", 799.99, "Electronics", 50));
@@ -95,6 +115,52 @@ public class Main {
         // In toàn bộ sản phẩm yêu thích
         System.out.println("\nCustomer's favorite products:");
         customer.showFavoriteProducts();
+
+
+        Customer newCustomer = new Customer("Bao", "hiugiuiuiu");
+        Product laptop = new Product("Laptop", 1299.99, "Electronics", 30);
+        Product phone = new Product("Smartphone", 799.99, "Electronics", 50);
+
+        customer.buyProduct(laptop);
+        customer.buyProduct(phone);
+        customer.buyProduct(laptop);
+        System.out.println(customer.getName() + " has made a total of " + customer.getTotalPurchasedProducts() + " purchases.");
+
+    }
+
+    public static void testInventoryManager() {
+        InventoryManager inventoryManager = new InventoryManager();
+        ProductManager productManager = ProductManager.getInstance();
+
+
+        productManager.addProduct(new Product("Laptop", 1000, "Electronics", 10));
+        productManager.addProduct(new Product("Phone", 500, "Mobile", 20));
+
+        inventoryManager.initializeStock();
+        inventoryManager.printProducts();;
+    }
+
+    public static void testReview() {
+        ReviewManager reviewManager = new ReviewManager();
+
+        User alice = new User("Alice", "alice@example.com");
+        User bob = new User("Bob", "bob@example.com");
+
+        Product laptop = new Product("MacBook Pro", 1999.99, "Electronics");
+        Product phone = new Product("iPhone 15", 999.99, "Mobile Phones");
+        Product headphones = new Product("Sony WH-1000XM5", 399.99, "Accessories");
+
+        reviewManager.addReview(alice, new Review(alice, laptop, 5, "Amazing performance!"));
+        reviewManager.addReview(alice, new Review(alice, phone, 4, "Great but expensive."));
+        reviewManager.addReview(bob, new Review(bob, headphones, 3, "Sound quality is decent."));
+
+        System.out.println("\nReviews by Alice:");
+        for (Review review : reviewManager.getReviewByUser(alice)) {
+            System.out.println("  - " + review);
+        }
+
+        System.out.println("\nAll Reviews:");
+        reviewManager.printAllReview();
     }
 
 
