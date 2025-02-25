@@ -21,6 +21,8 @@ public class Main {
 
 //        testReview();
     }
+
+
     public static void testProduct(){
         ProductManager productManager = new ProductManager();
 
@@ -107,12 +109,12 @@ public class Main {
         customer.addFavoriteProduct(products.get(3));
 
 
-        // Kiểm tra sản phẩm có trong danh sách yêu thích hay không
+        // Check favorite product in list
         System.out.println("\nCheck if 'Smartphone' is favorite:");
         boolean isFav = customer.isFavoriteProduct(new Product("Smartphone", 800.0));
         System.out.println(isFav ? "Yes, it's in favorites." : "No, it's not in favorites.");
 
-        // In toàn bộ sản phẩm yêu thích
+        // Print all favorite product
         System.out.println("\nCustomer's favorite products:");
         customer.showFavoriteProducts();
 
